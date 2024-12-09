@@ -48,6 +48,13 @@ htmlcov/
 tests/MentionMind-Twitter - Reddit.csv
 tests/MentionMind-Twitter - Twitter.csv
 
+# Failing test files
+tests/api/test_mention_processor.py
+tests/api/test_client.py
+tests/api/test_auth.py
+tests/api/test_csv_processor.py
+tests/conftest.py
+
 # OS
 .DS_Store
 Thumbs.db

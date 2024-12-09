@@ -2,6 +2,8 @@
 Tests for the mention processor
 """
 
+from typing import Dict
+
 import pytest
 
 from src.api.exceptions import ValidationError
@@ -15,7 +17,7 @@ def processor() -> MentionProcessor:
 
 
 @pytest.fixture
-def valid_mention():
+def valid_mention() -> Dict:
     """Create a valid mention fixture"""
     return {
         "id": "mention123",
@@ -27,7 +29,9 @@ def valid_mention():
     }
 
 
-def test_process_mention_success(processor: MentionProcessor, valid_mention) -> None:
+def test_process_mention_success(
+    processor: MentionProcessor, valid_mention: Dict
+) -> None:
     """Test successful mention processing"""
     result = processor.process_mention(valid_mention)
 
@@ -169,7 +173,9 @@ def test_enrich_mention_types(processor: MentionProcessor) -> None:
     assert results[2]["mention_type"] == "review"
 
 
-def test_prepare_for_storage_search_text(processor: MentionProcessor, valid_mention) -> None:
+def test_prepare_for_storage_search_text(
+    processor: MentionProcessor, valid_mention: Dict
+) -> None:
     """Test search text generation"""
     result = processor.process_mention(valid_mention)
 
@@ -184,22 +190,22 @@ def test_prepare_for_storage_search_text(processor: MentionProcessor, valid_ment
 def test_process_mention_minimal(processor: MentionProcessor) -> None:
     """Test processing a mention with minimal fields"""
     mention = {
-        'text': 'Hello world',
-        'source': 'test',
-        'url': 'https://example.com',
-        'author': 'test_user',
-        'date': '2024-01-01T00:00:00Z',
-        'status': 'new'
+        "text": "Hello world",
+        "source": "test",
+        "url": "https://example.com",
+        "author": "test_user",
+        "date": "2024-01-01T00:00:00Z",
+        "status": "new",
     }
-    
+
     processed = processor.process_mention(mention)
-    
-    assert processed['text'] == 'Hello world'
-    assert processed['source'] == 'test'
-    assert processed['url'] == 'https://example.com'
-    assert processed['author'] == 'test_user'
-    assert processed['date'] == '2024-01-01T00:00:00Z'
-    assert processed['status'] == 'new'
-    assert processed['language'] == 'unknown'
-    assert processed['sentiment'] == 'neutral'
-    assert 'processed_at' in processed
+
+    assert processed["text"] == "Hello world"
+    assert processed["source"] == "test"
+    assert processed["url"] == "https://example.com"
+    assert processed["author"] == "test_user"
+    assert processed["date"] == "2024-01-01T00:00:00Z"
+    assert processed["status"] == "new"
+    assert processed["language"] == "unknown"
+    assert processed["sentiment"] == "neutral"
+    assert "processed_at" in processed

@@ -2,9 +2,10 @@
 Tests for authentication functionality
 """
 
+from typing import Dict
+
 import pytest
 import requests_mock
-from typing import Dict
 
 from src.api.auth import Auth
 from src.api.exceptions import AuthError
