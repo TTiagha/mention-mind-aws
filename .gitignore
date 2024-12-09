@@ -44,6 +44,10 @@ htmlcov/
 .pytest_cache/
 .tox/
 
+# Test data files
+tests/MentionMind-Twitter - Reddit.csv
+tests/MentionMind-Twitter - Twitter.csv
+
 # OS
 .DS_Store
 Thumbs.db
